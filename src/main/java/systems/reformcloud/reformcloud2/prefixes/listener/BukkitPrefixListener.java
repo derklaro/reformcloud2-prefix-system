@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import systems.reformcloud.reformcloud2.prefixes.ReformCloud2Prefixes;
 
 public final class BukkitPrefixListener implements Listener {
 
@@ -20,6 +21,6 @@ public final class BukkitPrefixListener implements Listener {
             message = ChatColor.translateAlternateColorCodes('&', message);
         }
 
-        event.setFormat(event.getPlayer().getDisplayName() + " §8» §f" + message);
+        event.setFormat(String.format(ReformCloud2Prefixes.getInstance().getChatFormat(), event.getPlayer().getDisplayName(), message));
     }
 }

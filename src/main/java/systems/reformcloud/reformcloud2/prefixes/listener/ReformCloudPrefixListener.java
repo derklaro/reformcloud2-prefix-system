@@ -11,6 +11,8 @@ import systems.reformcloud.reformcloud2.permissions.util.group.PermissionGroup;
 import systems.reformcloud.reformcloud2.prefixes.ReformCloud2Prefixes;
 import systems.reformcloud.reformcloud2.prefixes.Utils;
 
+import javax.annotation.Nonnull;
+
 public final class ReformCloudPrefixListener {
 
     @Listener
@@ -60,7 +62,7 @@ public final class ReformCloudPrefixListener {
             team = other.getScoreboard().registerNewTeam(teamName);
         }
 
-        final String teamPrefix = loadUserGroup(group);
+        final String teamPrefix = getGroupPrefix(group);
 
         team.setPrefix(teamPrefix);
         team.addEntry(target.getName());
@@ -68,16 +70,9 @@ public final class ReformCloudPrefixListener {
         target.setDisplayName(teamPrefix + target.getName());
     }
 
-    private static String loadUserGroup(PermissionGroup group) {
-        switch (group.getName().toLowerCase()) {
-            case "admin":
-                return "§4Admin §8× §4";
-
-            case "premium":
-                return "§6";
-
-            default:
-                return "§7";
-        }
+    @Nonnull
+    private static String getGroupPrefix(@Nonnull PermissionGroup group) {
+        String prefix = ReformCloud2Prefixes.getInstance().getPrefixGetter().get(group.getName());
+        return prefix == null ? "" : prefix.length() > 16 ? prefix.substring(0, 16) : prefix;
     }
 }

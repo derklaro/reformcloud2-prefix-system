@@ -2,3 +2,6 @@ name: ReformCloud2Prefixes
 version: '1.0'
 author: derklaro
 main: systems.reformcloud.reformcloud2.prefixes.ReformCloud2Prefixes
+
+depend:
+  - ReformCloud2BukkitPermissions
